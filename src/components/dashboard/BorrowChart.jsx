@@ -1,4 +1,11 @@
-import { Card, CardContent, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  useTheme,
+} from "@mui/material";
+
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,6 +15,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+
 import dayjs from "dayjs";
 import { useMemo } from "react";
 import { useLibrary } from "../../context/LibraryContext";
@@ -19,7 +27,10 @@ export default function BorrowChart() {
   const { transactions } = useLibrary();
 
   const data = useMemo(() => {
-    const counts = MONTHS.map((month, index) => ({ month, issued: 0 }));
+    const counts = MONTHS.map((month) => ({
+  month,
+  issued: 0,
+}));
 
     transactions.forEach((t) => {
       const monthIndex = dayjs(t.issueDate).month();
