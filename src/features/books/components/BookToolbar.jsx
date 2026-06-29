@@ -10,8 +10,8 @@ export default function BookToolbar({ onAdd }) {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      mb={3}
-      gap={2}
+      mb={4}
+      gap={3}
       flexWrap="wrap"
     >
       <TextField

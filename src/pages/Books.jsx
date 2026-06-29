@@ -1,31 +1,28 @@
 import { useState } from "react";
-import Typography from "@mui/material/Typography";
+import { Fade, Box } from "@mui/material";
 import BookToolbar from "../features/books/components/BookToolbar";
 import BookTable from "../features/books/components/BookTable";
 import BookForm from "../features/books/components/BookForm";
-import { useBooks } from "../context/BooksContext";
+import PageHeader from "../components/ui/PageHeader";
+import { useBooks } from "../context/LibraryContext";
 
 export default function Books() {
-     const { books } = useBooks();
-     const [open, setOpen] = useState(false);
-  return (
-    <>
-<BookForm
-    open={open}
-    onClose={() => setOpen(false)}
-/>
-      <Typography
-        variant="h4"
-        fontWeight="bold"
-        mb={3}
-      >
-        Books
-      </Typography>
+  const { books } = useBooks();
+  const [open, setOpen] = useState(false);
 
-      <BookToolbar
-    onAdd={() => setOpen(true)}
-/>
-<BookTable rows={books} />
-    </>
+  return (
+    <Fade in timeout={400}>
+      <Box>
+        <PageHeader
+          title="Books"
+          subtitle="Manage your library book catalog"
+        />
+
+        <BookForm open={open} onClose={() => setOpen(false)} />
+
+        <BookToolbar onAdd={() => setOpen(true)} />
+        <BookTable rows={books} />
+      </Box>
+    </Fade>
   );
 }

@@ -6,22 +6,24 @@ export default function DashboardHeader() {
 
   return (
     <Box
-      mb={4}
+      mb={5}
       display="flex"
       justifyContent="space-between"
-      alignItems="center"
+      alignItems={{ xs: "flex-start", md: "center" }}
+      flexDirection={{ xs: "column", md: "row" }}
+      gap={2}
     >
       <Box>
-        <Typography variant="h4" fontWeight="bold">
+        <Typography variant="h4" fontWeight="bold" color="text.primary">
           Dashboard
         </Typography>
 
-        <Typography color="text.secondary">
+        <Typography color="text.secondary" mt={1.5}>
           Welcome back, Admin 👋
         </Typography>
       </Box>
 
-      <Typography color="text.secondary">
+      <Typography color="text.secondary" sx={{ pt: { xs: 0, md: 0.5 } }}>
         {today}
       </Typography>
     </Box>

@@ -26,7 +26,7 @@ function DrawerContent() {
                 </Typography>
             </Toolbar>
 
-    <List>
+    <List sx={{ px: 1, py: 2 }}>
         {navigation.map((item) => {
             const Icon = item.icon;
 
@@ -35,18 +35,29 @@ function DrawerContent() {
                 key={item.title}
                     component={NavLink}
                         to={item.path}
-                            sx={{
-                        mx: 1,
-                    my: 0.5,
+            sx={{
+                mx: 1.5,
+                my: 0.75,
+                py: 1.25,
                 borderRadius: 2,
+                color: "text.secondary",
+
+                "&:hover": {
+                    color: "text.primary",
+                },
 
                 "&.active": {
                     bgcolor: "primary.main",
-                    color: "white",
+                    color: "primary.contrastText",
                 },
 
                 "&.active .MuiListItemIcon-root": {
-                    color: "white",
+                    color: "primary.contrastText",
+                },
+
+                "& .MuiListItemIcon-root": {
+                    color: "inherit",
+                    minWidth: 40,
                 },
             }}
             >

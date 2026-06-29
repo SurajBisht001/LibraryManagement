@@ -1,0 +1,38 @@
+export const dummyMembers = [
+  {
+    id: 1,
+    name: "Rahul Sharma",
+    email: "rahul@email.com",
+    phone: "+91 9876543210",
+    membershipType: "Student",
+    joinedDate: "2024-01-15",
+    status: "Active",
+  },
+  {
+    id: 2,
+    name: "Priya Patel",
+    email: "priya@email.com",
+    phone: "+91 8765432109",
+    membershipType: "Faculty",
+    joinedDate: "2023-06-20",
+    status: "Active",
+  },
+  {
+    id: 3,
+    name: "Amit Kumar",
+    email: "amit@email.com",
+    phone: "+91 7654321098",
+    membershipType: "Student",
+    joinedDate: "2024-03-10",
+    status: "Active",
+  },
+  {
+    id: 4,
+    name: "Sneha Reddy",
+    email: "sneha@email.com",
+    phone: "+91 6543210987",
+    membershipType: "Public",
+    joinedDate: "2024-02-05",
+    status: "Inactive",
+  },
+];

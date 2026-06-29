@@ -15,10 +15,10 @@ export default function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        bgcolor: "#f4f7fe",
+        bgcolor: "background.default",
       }}
     >
-      <Card sx={{ width: 400, borderRadius: 3 }}>
+      <Card sx={{ width: 400 }}>
         <CardContent>
           <Typography
             variant="h4"

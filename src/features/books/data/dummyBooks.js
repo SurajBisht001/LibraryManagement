@@ -21,7 +21,7 @@ export const dummyBooks = [
     author: "Paulo Coelho",
     category: "Novel",
     isbn: "9780061122415",
-    status: "Available",
+    status: "Issued",
   },
   {
     id: 4,

@@ -1,47 +1,60 @@
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogActions,
   TextField,
   Stack,
   Button,
 } from "@mui/material";
+import toast from "react-hot-toast";
+import { useBooks } from "../../../context/LibraryContext";
 
-import { useState } from "react";
+const emptyForm = {
+  title: "",
+  author: "",
+  isbn: "",
+  category: "",
+};
 
 export default function BookForm({ open, onClose }) {
-
-  const [form, setForm] = useState({
-    title: "",
-    author: "",
-    isbn: "",
-    category: "",
-  });
+  const { addBook } = useBooks();
+  const [form, setForm] = useState(emptyForm);
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    if (!form.title.trim() || !form.author.trim()) {
+      toast.error("Title and author are required");
+      return;
+    }
+    addBook(form);
+    toast.success("Book added successfully");
+    setForm(emptyForm);
+    onClose();
+  };
+
+  const handleClose = () => {
+    setForm(emptyForm);
+    onClose();
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      fullWidth
-      maxWidth="sm"
-    >
+    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
       <DialogTitle>Add Book</DialogTitle>
 
       <DialogContent>
-        <Stack spacing={2} mt={2}>
-
+        <Stack spacing={2} mt={1}>
           <TextField
             name="title"
             label="Title"
             value={form.title}
             onChange={handleChange}
+            required
+            fullWidth
           />
 
           <TextField
@@ -49,6 +62,8 @@ export default function BookForm({ open, onClose }) {
             label="Author"
             value={form.author}
             onChange={handleChange}
+            required
+            fullWidth
           />
 
           <TextField
@@ -56,6 +71,7 @@ export default function BookForm({ open, onClose }) {
             label="ISBN"
             value={form.isbn}
             onChange={handleChange}
+            fullWidth
           />
 
           <TextField
@@ -63,14 +79,19 @@ export default function BookForm({ open, onClose }) {
             label="Category"
             value={form.category}
             onChange={handleChange}
+            fullWidth
           />
-
-          <Button variant="contained">
-            Save Book
-          </Button>
-
         </Stack>
       </DialogContent>
+
+      <DialogActions sx={{ px: 3, pb: 2 }}>
+        <Button onClick={handleClose} color="inherit">
+          Cancel
+        </Button>
+        <Button variant="contained" onClick={handleSubmit}>
+          Save Book
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }

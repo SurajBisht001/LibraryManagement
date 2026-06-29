@@ -1,49 +1,38 @@
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
+import toast from "react-hot-toast";
+import StatusChip from "../../../components/ui/StatusChip";
+import { useBooks } from "../../../context/LibraryContext";
 
-const columns = [
-  {
-    field: "title",
-    headerName: "Title",
-    flex: 1,
-  },
-  {
-    field: "author",
-    headerName: "Author",
-    flex: 1,
-  },
-  {
-    field: "category",
-    headerName: "Category",
-    flex: 1,
-  },
+const columns = (onDelete) => [
+  { field: "title", headerName: "Title", flex: 1, minWidth: 150 },
+  { field: "author", headerName: "Author", flex: 1, minWidth: 130 },
+  { field: "category", headerName: "Category", flex: 1, minWidth: 120 },
   {
     field: "status",
     headerName: "Status",
-    flex: 1,
+    width: 120,
+    renderCell: (params) => <StatusChip label={params.value} />,
   },
   {
     field: "actions",
     headerName: "Actions",
-    width: 120,
+    width: 110,
     sortable: false,
     filterable: false,
     renderCell: (params) => (
       <>
-        <IconButton
-          color="primary"
-          onClick={() => console.log("Edit", params.row)}
-        >
-          <EditIcon />
+        <IconButton color="primary" size="small">
+          <EditIcon fontSize="small" />
         </IconButton>
-
         <IconButton
           color="error"
-          onClick={() => console.log("Delete", params.row)}
+          size="small"
+          onClick={() => onDelete(params.row.id)}
         >
-          <DeleteIcon />
+          <DeleteIcon fontSize="small" />
         </IconButton>
       </>
     ),
@@ -51,21 +40,24 @@ const columns = [
 ];
 
 export default function BookTable({ rows }) {
+  const { deleteBook } = useBooks();
+
+  const handleDelete = (id) => {
+    deleteBook(id);
+    toast.success("Book removed");
+  };
+
   return (
-    <div style={{ height: 550, width: "100%" }}>
+    <Box sx={{ height: 550, width: "100%", mt: 3 }}>
       <DataGrid
         rows={rows}
-        columns={columns}
+        columns={columns(handleDelete)}
         pageSizeOptions={[5, 10, 20]}
         initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
+          pagination: { paginationModel: { pageSize: 5 } },
         }}
         disableRowSelectionOnClick
       />
-    </div>
+    </Box>
   );
 }

@@ -5,34 +5,43 @@ import {
   List,
   ListItem,
   ListItemText,
+  Divider,
 } from "@mui/material";
-
-const activities = [
-  "Harry Potter issued to Rahul",
-  "Atomic Habits returned",
-  "New member registered",
-  "The Alchemist added",
-  "Database backup completed",
-];
+import { useLibrary } from "../../context/LibraryContext";
 
 export default function RecentActivity() {
+  const { recentActivity } = useLibrary();
+
   return (
-    <Card sx={{ borderRadius: 3 }}>
+    <Card sx={{ height: "100%" }}>
       <CardContent>
-        <Typography
-          variant="h6"
-          gutterBottom
-        >
+        <Typography variant="h6" gutterBottom color="text.primary">
           Recent Activity
         </Typography>
 
-        <List>
-          {activities.map((activity, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemText primary={activity} />
-            </ListItem>
-          ))}
-        </List>
+        {recentActivity.length === 0 ? (
+          <Typography color="text.secondary" variant="body2" sx={{ mt: 2 }}>
+            No activity yet.
+          </Typography>
+        ) : (
+          <List disablePadding sx={{ mt: 1 }}>
+            {recentActivity.map((activity, index) => (
+              <div key={index}>
+                <ListItem disablePadding sx={{ py: 1.75 }}>
+                  <ListItemText
+                    primary={activity}
+                    primaryTypographyProps={{
+                      variant: "body2",
+                      color: "text.secondary",
+                      lineHeight: 1.6,
+                    }}
+                  />
+                </ListItem>
+                {index < recentActivity.length - 1 && <Divider sx={{ my: 0.5 }} />}
+              </div>
+            ))}
+          </List>
+        )}
       </CardContent>
     </Card>
   );

@@ -12,25 +12,21 @@ export default function DashboardLayout() {
 
   return (
     <Box sx={{ display: "flex" }}>
-        <Navbar onMenuClick={handleDrawerToggle} />
-            <Sidebar
-            mobileOpen={mobileOpen}
-        onClose={handleDrawerToggle}
-      />
+      <Navbar onMenuClick={handleDrawerToggle} />
+      <Sidebar mobileOpen={mobileOpen} onClose={handleDrawerToggle} />
 
-    <Box
+      <Box
         component="main"
-            sx={{
-                flexGrow: 1,
-                    bgcolor: "#F4F7FE",
-                minHeight: "100vh",
-            p: 3,
+        sx={{
+          flexGrow: 1,
+          bgcolor: "background.default",
+          minHeight: "100vh",
+          p: { xs: 2, sm: 3, md: 4 },
         }}
       >
-        {/* Space below fixed navbar */}
-        <Toolbar />
-            <Outlet />
-        </Box>
+        <Toolbar sx={{ mb: 2 }} />
+        <Outlet />
+      </Box>
     </Box>
   );
 }

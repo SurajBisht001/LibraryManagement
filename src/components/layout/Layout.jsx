@@ -11,9 +11,9 @@ export default function Layout({ children }) {
            component="main"
               sx={{
                 flexGrow: 1,
-                       p: 3,
-                  bgcolor: "#F5F7FB",
-               minHeight: "100vh",
+                p: 3,
+                bgcolor: "background.default",
+                minHeight: "100vh",
                }}
             >
         <Toolbar />
