@@ -41,7 +41,6 @@ function DrawerContent() {
                 py: 1.25,
                 borderRadius: 2,
                 color: "text.secondary",
-
                 "&:hover": {
                     color: "text.primary",
                 },
